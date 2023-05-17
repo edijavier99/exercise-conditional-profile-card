@@ -28,19 +28,26 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
-
+  let fullname = "";
+  if (variables.name === null || variables.lastname === null) {
+    alert("Please type your full name");
+  } else {
+    fullname = `<h1>${variables.name} ${variables.lastname}</h1>`;
+  }
+  let job = `<h2>${variables.role}</h2>`;
+  let location = `<h3>${variables.country},${variables.city}</h3>`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          ${fullname}
+          ${job}
+          ${location}
+          <ul class="${variables.socialMediaPosition}">
+            <li><a target="_blank" href="https://twitter.com/${variables.twitter}"><i class="fa fa-twitter"></i></a></li>
+            <li><a target="_blank" href="https://github.com/${variables.github}"><i class="fa fa-github"></i></a></li>
+            <li><a target="_blank" href="https://linkedin.com/${variables.linkedin}"><i class="fa fa-linkedin"></i></a></li>
+            <li><a target="_blank" href="https://instagram.com/${variables.instagram}"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -60,15 +67,15 @@ window.onload = function() {
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
-    twitter: null,
+    twitter: "elonmusk",
     github: "alesanchezr",
     linkedin: null,
-    instagram: null,
-    name: null,
-    lastname: null,
-    role: null,
-    country: null,
-    city: null
+    instagram: "edii_javiier",
+    name: "Name",
+    lastname: "Lastname",
+    role: "web-developer",
+    country: "Spain",
+    city: "Bilbao"
   };
   render(window.variables); //render the card for the first time
 
